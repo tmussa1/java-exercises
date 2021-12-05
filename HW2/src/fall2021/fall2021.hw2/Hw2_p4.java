@@ -1,5 +1,5 @@
 public class Hw2_p4 {
-	
+
 	/**
 	 * Calls helper method initializing predecessor to the header element
 	 * and successor to the first element
