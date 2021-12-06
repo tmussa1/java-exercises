@@ -13,11 +13,11 @@ public class Hw3_p7 {
 		int[] a3 = {10, 20, 30, 40, 50, 60, 70};
 		int[] a4 = {10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150};
 		
-		t = IntBST.makeBinaryTree(a4); // test with other arrays too
+		t = t.makeBinaryTree(a4); // test with other arrays too
 		System.out.println("Tree size: " + t.size());
 		System.out.println("Tree height: " + t.height(t.root));
 		System.out.println("");
-		
+
 		t.print(t.root);
 
 	}

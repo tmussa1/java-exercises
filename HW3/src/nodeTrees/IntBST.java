@@ -78,12 +78,32 @@ public class IntBST extends NodeBinaryTree<Integer> {
 		for (Node<Integer> c : children(n)) h = Math.max(h, height(c)); return h + 1; 
 	}
 
-
 	
-	public static IntBST makeBinaryTree(int[] a){
-		
-		// complete this method
-		return null;
+	public IntBST makeBinaryTree(int[] a){
+
+	    Node<Integer> root = addRoot(a[a.length /2]);
+
+		makeBinaryTree(a,root, 0, a.length);
+
+		print(root);
+
+		return this;
 	}
 
+	private Node<Integer> makeBinaryTree(int[] a, Node<Integer> root, int start, int end) {
+
+	  if(start >= end){
+		  return root;
+	  }
+	  int mid = start + ((end - start) / 2);
+	  Node<Integer> node = createNode(a[mid], root, null, null);
+
+	  Node<Integer> left = makeBinaryTree(a, node, start, mid);
+	  Node<Integer> right = makeBinaryTree(a,  node, mid + 1, end);
+
+	  root.setLeft(left);
+	  root.setRight(right);
+
+	  return root;
+	}
 }
