@@ -78,32 +78,55 @@ public class IntBST extends NodeBinaryTree<Integer> {
 		for (Node<Integer> c : children(n)) h = Math.max(h, height(c)); return h + 1; 
 	}
 
-	
+	/**
+	 * Constructs a binary tree from a sorted list
+	 * @param a
+	 * @return
+	 */
 	public IntBST makeBinaryTree(int[] a){
 
-	    Node<Integer> root = addRoot(a[a.length /2]);
+	    IntBST intBST = new IntBST();
 
-		makeBinaryTree(a,root, 0, a.length);
+		// Helper that drives the recursion
+		Node<Integer> root = makeBinaryTree(a,0, a.length);
 
-		print(root);
+		intBST.root = root; // Set the root and size
+		intBST.setSize(a.length);
 
-		return this;
+		return intBST;
 	}
 
-	private Node<Integer> makeBinaryTree(int[] a, Node<Integer> root, int start, int end) {
+	/**
+	 * Helper function to construct a binary tree from a sorted array
+	 * @param a
+	 * @param start
+	 * @param end
+	 * @return
+	 */
+	private Node<Integer> makeBinaryTree(int[] a, int start, int end) {
 
-	  if(start >= end){
-		  return root;
-	  }
-	  int mid = start + ((end - start) / 2);
-	  Node<Integer> node = createNode(a[mid], root, null, null);
+	    if(start >= end){
+		  return null; // Base case
+	    }
 
-	  Node<Integer> left = makeBinaryTree(a, node, start, mid);
-	  Node<Integer> right = makeBinaryTree(a,  node, mid + 1, end);
+	    int mid = start + ((end - start) / 2); // Calculates mid point
 
-	  root.setLeft(left);
-	  root.setRight(right);
+		Node<Integer> root = createNode(a[mid], null, null, null);
 
-	  return root;
+		// Call the left side recursively
+		Node<Integer> left = makeBinaryTree(a, start, mid);
+		if(left != null) {
+			left.setParent(root); // Set parent/child relationship
+			root.setLeft(left);
+		}
+
+		// Call the right side recursively
+		Node<Integer> right = makeBinaryTree(a, mid + 1, end);
+		if(right != null){
+			right.setParent(root); // Set parent/child relationship
+			root.setRight(right);
+		}
+
+		return root;
 	}
 }
